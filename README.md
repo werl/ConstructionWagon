@@ -1,6 +1,6 @@
 # Construction Train By werl
 
-Cargo wagon that has an expanded inventory (100 vs 40) and a base grid size of 10x12 and up to _INSERT_ with higher quality.
+Cargo wagon that has an expanded inventory (100 vs 40) and a base grid size of 12x10 and up to 17x15 with higher quality.
 
 ## Usage
 
@@ -10,6 +10,8 @@ Cargo wagon that has an expanded inventory (100 vs 40) and a base grid size of 1
    2. If an item in the construction wagon is not in the filter list it will be automatically moved into a cargo wagon with space
 
 ## Configuration
+
+![Config Screen](https://raw.githubusercontent.com/werl/ConstructionWagon/refs/heads/master/Config%20Screen.png "Config Screen")
 
 Each construction wagon can be configured to:
 1. Both
