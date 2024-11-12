@@ -1,0 +1,12 @@
+{
+  "name": "construction-train",
+  "version": "0.3.0",
+  "title": "Construction Train 2.0",
+  "author": "werl",
+  "dependencies": [
+    "base >= 2.0.0",
+    "? elevated-rails >= 2.0.0"
+    ],
+  "description": "Multi-wagon construction trains",
+  "factorio_version": "2.0"
+}
