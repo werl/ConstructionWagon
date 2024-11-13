@@ -58,7 +58,7 @@ data:extend({
     type = "technology",
     name = "ct-construction-train",
     icon_size = 128,
-    icon = "__construction-train__/graphics/technology/ct-construction-train.png",
+    icon = "__construction-train-werl__/graphics/technology/ct-construction-train.png",
     effects =
     {
       {
