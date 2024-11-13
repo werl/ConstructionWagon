@@ -18,12 +18,12 @@ jobs:
           node-version: '20'
 
     - name: Validate Mod
-      uses: TheBrutalX/factorio-mod-uploader-action@v1.1.0
+      uses: TheBrutalX/factorio-mod-uploader-action@1.1.0
       with:
           action: validate
 
     - name: Create zip
-      uses: TheBrutalX/factorio-mod-uploader-action@v1.1.0
+      uses: TheBrutalX/factorio-mod-uploader-action@1.1.0
       with:
           action: compress
     - name: Upload To Relese
@@ -34,7 +34,7 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         content-type: application/zip
     - name: Upload Mod
-      uses: TheBrutalX/factorio-mod-uploader-action@v1.1.0
+      uses: TheBrutalX/factorio-mod-uploader-action@1.1.0
       with:
           action: upload
           factorio-api-key: ${{ secrets.FACTORIO_TOKEN }}
