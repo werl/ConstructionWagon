@@ -22,13 +22,6 @@ jobs:
           source: .
           format: zip
           dest: "./${{ steps.vars.outputs.filename }}.zip"
-      - name: Upload To Relese
-        uses: Shopify/upload-to-release@v2.0.0
-        with:
-          name: ${{ steps.vars.outputs.filename }}.zip
-          path: ${{ steps.vars.outputs.filename }}.zip
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          content-type: application/zip
       - name: Upload to Factorio 
         uses: mchangrh/factorio-mod-upload@v1
         with:
