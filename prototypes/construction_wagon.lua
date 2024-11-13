@@ -1,6 +1,6 @@
 
 local e
-local tint = {1.0,0.757,0.169}
+local tint = settings.startup["ct-default-wagon-tint"].value
 
 e = table.deepcopy(data.raw["cargo-wagon"]["cargo-wagon"])
 e.name = "ct-construction-wagon"
