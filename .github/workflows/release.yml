@@ -15,8 +15,6 @@ jobs:
         run: |
           filename="${{ vars.FACTORIO_MOD_NAME }}_${{ github.event.release.tag_name }}"
           echo "filename=$filename" >> $GITHUB_OUTPUT
-      - run: 
-      - run: git archive --prefix "${{ steps.vars.outputs.filename }}/" -o "./${{ steps.vars.outputs.filename }}.zip" "${{ github.event.release.tag_name }}"
       - name: Compress/Decompress
         uses: somaz94/compress-decompress@v1.0.3
         with:
