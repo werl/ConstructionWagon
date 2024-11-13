@@ -9,32 +9,32 @@ jobs:
     environment: Mod Upload
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-          node-version: '20'
-
-    - name: Validate Mod
-      uses: TheBrutalX/factorio-mod-uploader-action@1.1.0
-      with:
-          action: validate
-
-    - name: Create zip
-      uses: TheBrutalX/factorio-mod-uploader-action@1.1.0
-      with:
-          action: compress
-    - name: Upload To Relese
-      uses: Shopify/upload-to-release@v2.0.0
-      with:
-        name: ${{ steps.vars.outputs.ZIP_FILE }}.zip
-        path: ${{ steps.vars.outputs.ZIP_FILE }}.zip
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        content-type: application/zip
-    - name: Upload Mod
-      uses: TheBrutalX/factorio-mod-uploader-action@1.1.0
-      with:
-          action: upload
-          factorio-api-key: ${{ secrets.FACTORIO_TOKEN }}
+      - uses: actions/checkout@v3
+      - name: Set output variables
+        id: vars
+        run: |
+          filename="${{ vars.FACTORIO_MOD_NAME }}_${{ github.event.release.tag_name }}"
+          echo "filename=$filename" >> $GITHUB_OUTPUT
+      - run: 
+      - run: git archive --prefix "${{ steps.vars.outputs.filename }}/" -o "./${{ steps.vars.outputs.filename }}.zip" "${{ github.event.release.tag_name }}"
+      - name: Compress/Decompress
+        uses: somaz94/compress-decompress@v1.0.3
+        with:
+          command: compress
+          source: .
+          format: zip
+          dest: "./${{ steps.vars.outputs.filename }}.zip"
+      - name: Upload To Relese
+        uses: Shopify/upload-to-release@v2.0.0
+        with:
+          name: ${{ steps.vars.outputs.filename }}.zip
+          path: ${{ steps.vars.outputs.filename }}.zip
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          content-type: application/zip
+      - name: Upload to Factorio 
+        uses: mchangrh/factorio-mod-upload@v1
+        with:
+          mod-name: ${{ vars.MOD_NAME }}
+        env:
+          FACTORIO_MODS_TOKEN: ${{ secrets.FACTORIO_TOKEN}}
+          FILENAME: ${{ steps.vars.outputs.filename }}.zip
