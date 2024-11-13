@@ -3,7 +3,6 @@ name: release
 on:
   release:
     types: [published]
-  workflow_dispatch:
 
 jobs:
   release:
@@ -14,7 +13,7 @@ jobs:
       - name: Set output variables
         id: vars
         run:
-          filename="${{ vars.MOD_NAME }}_${{ github.event.release.tag_name }}"
+          filename="${{ vars.FACTORIO_MOD_NAME }}_${{ github.event.release.tag_name }}"
           echo "filename=$filename" >> $GITHUB_OUTPUT
       - run: git archive --prefix "${{ steps.vars.outputs.filename }}/" -o "./${{ steps.vars.outputs.filename }}.zip" "${{ github.event.release.tag_name }}"
       - name: Upload To Relese
@@ -24,3 +23,10 @@ jobs:
           path: ${{ steps.vars.outputs.filename }}.zip
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           content-type: application/zip
+      - name: Upload to Factorio 
+        uses: mchangrh/factorio-mod-upload@v1
+        with:
+          mod-name: ${{ vars.MOD_NAME }}
+        env:
+          FACTORIO_MODS_TOKEN: ${{ secrets.FACTORIO_TOKEN}}
+          FILENAME: ${{ steps.vars.outputs.filename }}.zip
