@@ -7,6 +7,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    environment: Mod Upload
     steps:
       - uses: actions/checkout@v3
       - name: Set output variables
