@@ -22,6 +22,7 @@ jobs:
           source: .
           format: zip
           dest: "./${{ steps.vars.outputs.filename }}.zip"
+      - run: ls
       - name: Upload to Factorio 
         uses: mchangrh/factorio-mod-upload@v1
         with:
