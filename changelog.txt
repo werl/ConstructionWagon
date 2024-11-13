@@ -3,6 +3,8 @@ Version: 0.3.0
 Date: 2024-11-10
   Changes:
     - Update to Factorio 2.0
+  Info:
+    - Changed Mod Name to construction-train-werl
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 2021-01-03
