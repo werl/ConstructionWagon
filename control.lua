@@ -18,7 +18,7 @@ local function fill_stack(train, dst_wagon, filter, dst_stack) -- stack may or m
   end
   for _, src_wagon in pairs(train.cargo_wagons) do
     if is_storage_wagon(src_wagon) then
-      local src_inv = src_wagon.get_output_inventory()
+      local src_inv = src_wagon.get_inventory(defines.inventory.cargo_wagon)
       while true do -- might be multiple loops because stacks might not be full / compressed
         local src_stack = src_inv.find_item_stack(filter)
         if src_stack then
@@ -58,7 +58,7 @@ end
 function manage_construction_wagon(info, tick)
   if info.cargo_mode_disabled then return end
   local train = info.entity.train
-  local inv = info.entity.get_output_inventory()
+  local inv = info.entity.get_inventory(defines.inventory.cargo_wagon)
   if inv then
     for i=1,#inv do
       if (tick + i) % #inv == 0 then
@@ -106,10 +106,10 @@ script.on_event(defines.events.on_tick, function(event)
 end)
 
 script.on_event(defines.events.on_built_entity, function(event)
-    local cargo_mode = settings.get_player_settings(game.players[event.player_index])["ct-default-cargo-mode"].value
-    local info = {entity=event.entity}
-    update_cargo_mode(info, cargo_mode)
-    storage.construction_wagons[event.entity.unit_number] = info
+  local cargo_mode = settings.get_player_settings(game.players[event.player_index])["ct-default-cargo-mode"].value
+  local info = {entity=event.entity}
+  update_cargo_mode(info, cargo_mode)
+  storage.construction_wagons[event.entity.unit_number] = info
 end, {{filter = "name", name = "ct-construction-wagon"}})
 
 script.on_event(defines.events.on_gui_opened, function(event)
