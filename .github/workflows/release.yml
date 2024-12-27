@@ -21,7 +21,7 @@ jobs:
           command: compress
           source: .
           format: zip
-          dest: "./${{ steps.vars.outputs.filename }}.zip"
+          dest: "./${{ steps.vars.outputs.filename }}"
       - run: ls
       - name: Upload to Factorio 
         uses: mchangrh/factorio-mod-upload@v1
